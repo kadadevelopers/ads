@@ -1,11 +1,3 @@
-<div align="center">
-  <a href="https://kadadevelopers.com/">
-    <picture>
-      <img src="https://raw.githubusercontent.com/solodroidev/content/uploads/images/logo.png" alt="kadadevelopers Logo" height="70">
-    </picture>
-  </a>
-</div>
-
 ## kadadevelopers-ads-sdk
 Android library for displaying multiple Ad Networks developed by [kadadevelopers](https://kadadevelopers.com/)
 
