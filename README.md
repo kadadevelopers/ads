@@ -38,7 +38,7 @@ dependencies {
 
 ## Ad Network Sdk options
 ### mega-ads-sdk
-`mega-ads-sdk:1.+'` with ad network support `AdMob, Ad Manager, Meta Audience Network, AppLovin Max, AppLovin Discovery, Start.io, Unity Ads, ironSource, Pangle, Huawei Petal Ads, Yandex Ads`
+`mega-ads-sdk:1.+'` with ad network support `AdMob, Ad Manager, Meta Audience Network, AppLovin Max, AppLovin Discovery, Start.io, Unity Ads, ironSource, Wortise, Pangle, Huawei Petal Ads, Yandex Ads`
 
 ### mega-ads-sdk-no-is
 `mega-ads-sdk-no-is:1.+'` with ad network support `AdMob, Ad Manager, Meta Audience Network, AppLovin Max, AppLovin Discovery, Start.io, Unity Ads, Pangle, Huawei Petal Ads, Yandex Ads`
