@@ -17,14 +17,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <kadadevelopers.ads.util.TemplateView
+            <com.kadadevelopers.ads.util.TemplateView
                 android:id="@+id/admob_native_ad_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 app:gnt_template_type="@layout/gnt_admob_radio_template_view" />
 
-            <kadadevelopers.ads.util.AdManagerTemplateView
+            <com.kadadevelopers.ads.util.AdManagerTemplateView
                 android:id="@+id/google_ad_manager_native_ad_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

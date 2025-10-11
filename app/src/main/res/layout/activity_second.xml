@@ -22,7 +22,7 @@
         android:layout_below="@+id/toolbar"
         android:scrollbars="none" />
 
-    <kadadevelopers.ads.ui.BannerAdView
+    <com.kadadevelopers.ads.ui.BannerAdView
         android:id="@+id/bannerAdView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
