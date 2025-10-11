@@ -1,11 +1,3 @@
-<div align="center">
-  <a href="https://kadadevelopers.com/">
-    <picture>
-      <img src="https://raw.githubusercontent.com/solodroidev/content/uploads/images/logo.png" alt="kadadevelopers Logo" height="70">
-    </picture>
-  </a>
-</div>
-
 ## kadadevelopers-ads-sdk
 Android library for displaying multiple Ad Networks developed by [kadadevelopers](https://kadadevelopers.com/)
 
@@ -46,7 +38,7 @@ dependencies {
 
 ## Ad Network Sdk options
 ### mega-ads-sdk
-`mega-ads-sdk:1.+'` with ad network support `AdMob, Ad Manager, Meta Audience Network, AppLovin Max, AppLovin Discovery, Start.io, Unity Ads, ironSource, Pangle, Huawei Petal Ads, Yandex Ads`
+`mega-ads-sdk:1.+'` with ad network support `AdMob, Ad Manager, Meta Audience Network, AppLovin Max, AppLovin Discovery, Start.io, Unity Ads, ironSource, Wortise, Pangle, Huawei Petal Ads, Yandex Ads`
 
 ### mega-ads-sdk-no-is
 `mega-ads-sdk-no-is:1.+'` with ad network support `AdMob, Ad Manager, Meta Audience Network, AppLovin Max, AppLovin Discovery, Start.io, Unity Ads, Pangle, Huawei Petal Ads, Yandex Ads`
