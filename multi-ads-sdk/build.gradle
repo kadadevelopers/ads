@@ -39,7 +39,12 @@ dependencies {
     implementation 'com.unity3d.ads-mediation:mediation-sdk:8.10.0'
     implementation 'com.unity3d.ads-mediation:adquality-sdk:7.26.0'
     implementation 'com.facebook.android:audience-network-sdk:6.20.0'
-    implementation 'com.wortise:android-sdk:1.7.1'
+    implementation('com.wortise:android-sdk:1.7.1') {
+        exclude group: 'com.google.ads.mediation', module: 'mintegral'
+        exclude group: 'com.iab.omid.library.ironsrc'
+        exclude group: 'com.ironsource.sdk'
+    }
+    implementation 'com.vungle:vungle-ads:7.6.0'
 
     //AdMob mediation
     implementation 'com.google.ads.mediation:applovin:13.3.1.1'
@@ -53,6 +58,7 @@ dependencies {
     implementation 'com.applovin.mediation:unityads-adapter:4.16.0.0'
     implementation 'com.applovin.mediation:ironsource-adapter:8.10.0.0.0'
     implementation 'com.applovin.mediation:facebook-adapter:6.20.0.0'
+    implementation 'com.applovin.mediation:vungle-adapter:7.6.0.0'
 
     //ironSource mediation
     implementation 'com.unity3d.ads-mediation:applovin-adapter:4.3.54'
