@@ -974,8 +974,11 @@ public class InterstitialAd {
                         break;
 
                     case APPLOVIN_DISCOVERY:
-                        if (appLovinInterstitialAdDialog != null) {
+                        if (appLovinInterstitialAdDialog != null && appLovinAd != null) {
                             appLovinInterstitialAdDialog.showAndRender(appLovinAd);
+                        } else {
+                            Log.d(TAG, "AppLovin Discovery ad not ready yet");
+                            showBackupInterstitialAd();
                         }
                         break;
 
@@ -1124,12 +1127,11 @@ public class InterstitialAd {
                     break;
 
                 case APPLOVIN_DISCOVERY:
-                    if (appLovinInterstitialAdDialog != null) {
+                    if (appLovinInterstitialAdDialog != null && appLovinAd != null) {
                         appLovinInterstitialAdDialog.showAndRender(appLovinAd);
                     } else {
-                        if (withListener) {
-                            onInterstitialAdDismissedListener.onInterstitialAdDismissed();
-                        }
+                        Log.d(TAG, "AppLovin Discovery ad not ready yet");
+                        showBackupInterstitialAd();
                     }
                     break;
 
