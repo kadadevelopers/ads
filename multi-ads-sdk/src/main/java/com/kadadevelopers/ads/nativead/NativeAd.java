@@ -18,6 +18,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.applovin.adview.AppLovinAdView;
@@ -41,6 +43,13 @@ import com.applovin.mediation.nativeAds.MaxNativeAdViewBinder;
 import com.applovin.sdk.AppLovinAd;
 import com.applovin.sdk.AppLovinAdLoadListener;
 import com.applovin.sdk.AppLovinAdSize;
+import com.bumptech.glide.Glide;
+import com.bytedance.sdk.openadsdk.api.nativeAd.PAGImageItem;
+import com.bytedance.sdk.openadsdk.api.nativeAd.PAGMediaView;
+import com.bytedance.sdk.openadsdk.api.nativeAd.PAGNativeAd;
+import com.bytedance.sdk.openadsdk.api.nativeAd.PAGNativeAdInteractionListener;
+import com.bytedance.sdk.openadsdk.api.nativeAd.PAGNativeAdLoadListener;
+import com.bytedance.sdk.openadsdk.api.nativeAd.PAGNativeRequest;
 import com.facebook.ads.AdError;
 import com.facebook.ads.AdOptionsView;
 import com.facebook.ads.NativeAdLayout;
@@ -101,6 +110,7 @@ public class NativeAd {
 
     LinearLayout appLovinDiscoveryMrecAd;
     private AppLovinAdView appLovinAdView;
+
     private GoogleNativeAd mGoogleNativeAd;
     FrameLayout wortiseNativeAd;
 
@@ -114,9 +124,6 @@ public class NativeAd {
     private String appLovinDiscMrecZoneId = "";
     private String wortiseNativeId = "";
     private String alienAdsNativeId = "";
-    private String pangleNativeId = "";
-    private String huaweiNativeId = "";
-    private String yandexNativeId = "";
     private int placementStatus = 1;
     private boolean darkTheme = false;
     private boolean legacyGDPR = false;
@@ -212,21 +219,6 @@ public class NativeAd {
 
     public NativeAd setAlienAdsNativeId(String alienAdsNativeId) {
         this.alienAdsNativeId = alienAdsNativeId;
-        return this;
-    }
-
-    public NativeAd setPangleNativeId(String pangleNativeId) {
-        this.pangleNativeId = pangleNativeId;
-        return this;
-    }
-
-    public NativeAd setHuaweiNativeId(String huaweiNativeId) {
-        this.huaweiNativeId = huaweiNativeId;
-        return this;
-    }
-
-    public NativeAd setYandexNativeId(String yandexNativeId) {
-        this.yandexNativeId = yandexNativeId;
         return this;
     }
 
