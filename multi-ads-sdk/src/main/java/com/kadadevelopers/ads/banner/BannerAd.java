@@ -18,6 +18,7 @@ import static com.kadadevelopers.ads.util.Constant.STARTAPP;
 import static com.kadadevelopers.ads.util.Constant.UNITY;
 import static com.kadadevelopers.ads.util.Constant.UNITY_ADS_BANNER_HEIGHT_MEDIUM;
 import static com.kadadevelopers.ads.util.Constant.UNITY_ADS_BANNER_WIDTH_MEDIUM;
+import static com.kadadevelopers.ads.util.Constant.WORTISE;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -59,6 +60,8 @@ import com.startapp.sdk.ads.banner.BannerListener;
 import com.unity3d.services.banners.BannerErrorInfo;
 import com.unity3d.services.banners.BannerView;
 import com.unity3d.services.banners.UnityBannerSize;
+import com.wortise.ads.AdError;
+import com.wortise.ads.RevenueData;
 
 @SuppressWarnings("deprecation")
 public class BannerAd {
@@ -71,6 +74,8 @@ public class BannerAd {
     private AppLovinAdView appLovinAdView;
     FrameLayout ironSourceBannerView;
     private IronSourceBannerLayout ironSourceBannerLayout;
+    private com.wortise.ads.banner.BannerAd wortiseBannerAd;
+    FrameLayout wortiseBannerView;
 
     private String adStatus = "";
     private String adNetwork = "";
@@ -435,6 +440,44 @@ public class BannerAd {
                     this.appLovinAdView.loadNextAd();
                     break;
 
+                case WORTISE:
+                    wortiseBannerAd = new com.wortise.ads.banner.BannerAd(activity);
+                    wortiseBannerAd.setAdSize(Tools.getWortiseAdSize(activity));
+                    wortiseBannerAd.setAdUnitId(wortiseBannerId);
+                    wortiseBannerView = activity.findViewById(R.id.wortise_banner_view_container);
+                    wortiseBannerView.addView(wortiseBannerAd);
+                    wortiseBannerAd.loadAd();
+                    wortiseBannerAd.setListener(new com.wortise.ads.banner.BannerAd.Listener() {
+                        @Override
+                        public void onBannerRevenuePaid(@NonNull com.wortise.ads.banner.BannerAd bannerAd, @NonNull RevenueData revenueData) {
+
+                        }
+
+                        @Override
+                        public void onBannerImpression(@NonNull com.wortise.ads.banner.BannerAd bannerAd) {
+
+                        }
+
+                        @Override
+                        public void onBannerFailedToLoad(@NonNull com.wortise.ads.banner.BannerAd bannerAd, @NonNull AdError adError) {
+                            wortiseBannerView.setVisibility(View.GONE);
+                            loadBackupBannerAd();
+                            Log.d(TAG, "failed to load Wortise banner: " + adError);
+                        }
+
+                        @Override
+                        public void onBannerClicked(@NonNull com.wortise.ads.banner.BannerAd bannerAd) {
+
+                        }
+
+                        @Override
+                        public void onBannerLoaded(@NonNull com.wortise.ads.banner.BannerAd bannerAd) {
+                            wortiseBannerView.setVisibility(View.VISIBLE);
+                            Log.d(TAG, "Wortise banner loaded");
+                        }
+                    });
+                    break;
+
                 case IRONSOURCE:
                 case FAN_BIDDING_IRONSOURCE:
                     ironSourceBannerView = activity.findViewById(R.id.ironsource_banner_view_container);
@@ -718,6 +761,43 @@ public class BannerAd {
                     });
                     appLovinDiscoveryAdView.addView(this.appLovinAdView);
                     this.appLovinAdView.loadNextAd();
+                    break;
+
+                case WORTISE:
+                    wortiseBannerAd = new com.wortise.ads.banner.BannerAd(activity);
+                    wortiseBannerAd.setAdSize(Tools.getWortiseAdSize(activity));
+                    wortiseBannerAd.setAdUnitId(wortiseBannerId);
+                    wortiseBannerView = activity.findViewById(R.id.wortise_banner_view_container);
+                    wortiseBannerView.addView(wortiseBannerAd);
+                    wortiseBannerAd.loadAd();
+                    wortiseBannerAd.setListener(new com.wortise.ads.banner.BannerAd.Listener() {
+                        @Override
+                        public void onBannerRevenuePaid(@NonNull com.wortise.ads.banner.BannerAd bannerAd, @NonNull RevenueData revenueData) {
+
+                        }
+
+                        @Override
+                        public void onBannerImpression(@NonNull com.wortise.ads.banner.BannerAd bannerAd) {
+
+                        }
+
+                        @Override
+                        public void onBannerFailedToLoad(@NonNull com.wortise.ads.banner.BannerAd bannerAd, @NonNull AdError adError) {
+                            wortiseBannerView.setVisibility(View.GONE);
+                            Log.d(TAG, " [backup] failed to load Wortise banner: " + adError);
+                        }
+
+                        @Override
+                        public void onBannerClicked(@NonNull com.wortise.ads.banner.BannerAd bannerAd) {
+
+                        }
+
+                        @Override
+                        public void onBannerLoaded(@NonNull com.wortise.ads.banner.BannerAd bannerAd) {
+                            wortiseBannerView.setVisibility(View.VISIBLE);
+                            Log.d(TAG, " [backup] Wortise banner loaded");
+                        }
+                    });
                     break;
 
                 case IRONSOURCE:

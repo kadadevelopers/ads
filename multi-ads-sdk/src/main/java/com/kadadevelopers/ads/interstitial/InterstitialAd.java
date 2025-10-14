@@ -12,6 +12,7 @@ import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_AD_MANAGER;
 import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_APPLOVIN_MAX;
 import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_IRONSOURCE;
 import static com.kadadevelopers.ads.util.Constant.GOOGLE_AD_MANAGER;
+import static com.kadadevelopers.ads.util.Constant.WORTISE;
 import static com.kadadevelopers.ads.util.Constant.IRONSOURCE;
 import static com.kadadevelopers.ads.util.Constant.NONE;
 import static com.kadadevelopers.ads.util.Constant.STARTAPP;
@@ -58,6 +59,7 @@ import com.unity3d.ads.IUnityAdsLoadListener;
 import com.unity3d.ads.IUnityAdsShowListener;
 import com.unity3d.ads.UnityAds;
 import com.unity3d.ads.UnityAdsShowOptions;
+import com.wortise.ads.RevenueData;
 
 import java.util.concurrent.TimeUnit;
 
@@ -74,6 +76,7 @@ public class InterstitialAd {
     private MaxInterstitialAd maxInterstitialAd;
     public AppLovinInterstitialAdDialog appLovinInterstitialAdDialog;
     public AppLovinAd appLovinAd;
+    public com.wortise.ads.interstitial.InterstitialAd wortiseInterstitialAd;
     private int retryAttempt;
     private int counter = 1;
 
@@ -446,6 +449,54 @@ public class InterstitialAd {
                     appLovinInterstitialAdDialog = AppLovinInterstitialAd.create(AppLovinSdk.getInstance(activity), activity);
                     break;
 
+                case WORTISE:
+                    wortiseInterstitialAd = new com.wortise.ads.interstitial.InterstitialAd(activity, wortiseInterstitialId);
+                    wortiseInterstitialAd.setListener(new com.wortise.ads.interstitial.InterstitialAd.Listener() {
+                        @Override
+                        public void onInterstitialRevenuePaid(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd, @NonNull RevenueData revenueData) {
+
+                        }
+
+                        @Override
+                        public void onInterstitialImpression(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd) {
+
+                        }
+
+                        @Override
+                        public void onInterstitialFailedToShow(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd, @NonNull com.wortise.ads.AdError adError) {
+
+                        }
+
+                        @Override
+                        public void onInterstitialFailedToLoad(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd, @NonNull com.wortise.ads.AdError adError) {
+                            loadBackupInterstitialAd();
+                            Log.d(TAG, "[Wortise] Failed to load Interstitial Ad");
+                        }
+
+                        @Override
+                        public void onInterstitialClicked(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd) {
+
+                        }
+
+                        @Override
+                        public void onInterstitialDismissed(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd) {
+                            loadInterstitialAd();
+                            Log.d(TAG, "[Wortise] Interstitial Ad dismissed");
+                        }
+
+                        @Override
+                        public void onInterstitialLoaded(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd) {
+                            Log.d(TAG, "[Wortise] Interstitial Ad loaded");
+                        }
+
+                        @Override
+                        public void onInterstitialShown(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd) {
+
+                        }
+                    });
+                    wortiseInterstitialAd.loadAd();
+                    break;
+
                 case IRONSOURCE:
                 case FAN_BIDDING_IRONSOURCE:
                     IronSource.setLevelPlayInterstitialListener(new LevelPlayInterstitialListener() {
@@ -726,6 +777,53 @@ public class InterstitialAd {
                     appLovinInterstitialAdDialog = AppLovinInterstitialAd.create(AppLovinSdk.getInstance(activity), activity);
                     break;
 
+                case WORTISE:
+                    wortiseInterstitialAd = new com.wortise.ads.interstitial.InterstitialAd(activity, wortiseInterstitialId);
+                    wortiseInterstitialAd.setListener(new com.wortise.ads.interstitial.InterstitialAd.Listener() {
+                        @Override
+                        public void onInterstitialRevenuePaid(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd, @NonNull RevenueData revenueData) {
+
+                        }
+
+                        @Override
+                        public void onInterstitialImpression(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd) {
+
+                        }
+
+                        @Override
+                        public void onInterstitialFailedToShow(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd, @NonNull com.wortise.ads.AdError adError) {
+
+                        }
+
+                        @Override
+                        public void onInterstitialFailedToLoad(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd, @NonNull com.wortise.ads.AdError adError) {
+                            Log.d(TAG, "[Wortise] [Backup] Failed to load Interstitial Ad");
+                        }
+
+                        @Override
+                        public void onInterstitialClicked(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd) {
+
+                        }
+
+                        @Override
+                        public void onInterstitialDismissed(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd) {
+                            loadInterstitialAd();
+                            Log.d(TAG, "[Wortise] [Backup] Interstitial Ad dismissed");
+                        }
+
+                        @Override
+                        public void onInterstitialLoaded(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd) {
+                            Log.d(TAG, "[Wortise] [Backup] Interstitial Ad loaded");
+                        }
+
+                        @Override
+                        public void onInterstitialShown(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd) {
+
+                        }
+                    });
+                    wortiseInterstitialAd.loadAd();
+                    break;
+
                 case IRONSOURCE:
                 case FAN_BIDDING_IRONSOURCE:
                     IronSource.setLevelPlayInterstitialListener(new LevelPlayInterstitialListener() {
@@ -905,6 +1003,54 @@ public class InterstitialAd {
                         }
                         break;
 
+                    case WORTISE:
+                        wortiseInterstitialAd = new com.wortise.ads.interstitial.InterstitialAd(activity, wortiseInterstitialId);
+                        wortiseInterstitialAd.setListener(new com.wortise.ads.interstitial.InterstitialAd.Listener() {
+                            @Override
+                            public void onInterstitialRevenuePaid(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd, @NonNull RevenueData revenueData) {
+
+                            }
+
+                            @Override
+                            public void onInterstitialImpression(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd) {
+
+                            }
+
+                            @Override
+                            public void onInterstitialFailedToShow(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd, @NonNull com.wortise.ads.AdError adError) {
+
+                            }
+
+                            @Override
+                            public void onInterstitialFailedToLoad(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd, @NonNull com.wortise.ads.AdError adError) {
+                                loadBackupInterstitialAd();
+                                Log.d(TAG, "[Wortise] Failed to load Interstitial Ad");
+                            }
+
+                            @Override
+                            public void onInterstitialClicked(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd) {
+
+                            }
+
+                            @Override
+                            public void onInterstitialDismissed(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd) {
+                                loadInterstitialAd();
+                                Log.d(TAG, "[Wortise] Interstitial Ad dismissed");
+                            }
+
+                            @Override
+                            public void onInterstitialLoaded(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd) {
+                                Log.d(TAG, "[Wortise] Interstitial Ad loaded");
+                            }
+
+                            @Override
+                            public void onInterstitialShown(@NonNull com.wortise.ads.interstitial.InterstitialAd interstitialAd) {
+
+                            }
+                        });
+                        wortiseInterstitialAd.loadAd();
+                        break;
+
                     default:
                         if (withListener) {
                             onInterstitialAdDismissedListener.onInterstitialAdDismissed();
@@ -1039,6 +1185,12 @@ public class InterstitialAd {
                         if (withListener) {
                             onInterstitialAdDismissedListener.onInterstitialAdDismissed();
                         }
+                    }
+                    break;
+
+                case WORTISE:
+                    if (wortiseInterstitialAd != null && wortiseInterstitialAd.isAvailable()) {
+                        wortiseInterstitialAd.showAd();
                     }
                     break;
 
