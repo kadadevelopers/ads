@@ -284,6 +284,8 @@ public class NativeAd {
             applovinNativeAd = activity.findViewById(R.id.applovin_native_ad_container);
             appLovinDiscoveryMrecAd = activity.findViewById(R.id.applovin_discovery_mrec_ad_container);
 
+            wortiseNativeAd = activity.findViewById(R.id.wortise_native_ad_container);
+
             switch (adNetwork) {
                 case ADMOB:
                 case FAN_BIDDING_ADMOB:
@@ -704,6 +706,8 @@ public class NativeAd {
 
             applovinNativeAd = activity.findViewById(R.id.applovin_native_ad_container);
             appLovinDiscoveryMrecAd = activity.findViewById(R.id.applovin_discovery_mrec_ad_container);
+
+            wortiseNativeAd = activity.findViewById(R.id.wortise_native_ad_container);
 
             switch (backupAdNetwork) {
                 case ADMOB:
