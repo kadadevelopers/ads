@@ -12,6 +12,7 @@ import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_AD_MANAGER;
 import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_APPLOVIN_MAX;
 import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_IRONSOURCE;
 import static com.kadadevelopers.ads.util.Constant.GOOGLE_AD_MANAGER;
+import static com.kadadevelopers.ads.util.Constant.WORTISE;
 import static com.kadadevelopers.ads.util.Constant.IRONSOURCE;
 import static com.kadadevelopers.ads.util.Constant.NONE;
 import static com.kadadevelopers.ads.util.Constant.STARTAPP;
@@ -42,12 +43,15 @@ import com.startapp.sdk.adsbase.StartAppAd;
 import com.startapp.sdk.adsbase.StartAppSDK;
 import com.unity3d.ads.IUnityAdsInitializationListener;
 import com.unity3d.ads.UnityAds;
+import com.wortise.ads.AdSettings;
+import com.wortise.ads.WortiseSdk;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import kotlin.Unit;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -222,6 +226,14 @@ public class InitializeAd {
                     });
                     break;
 
+                case WORTISE:
+                    WortiseSdk.initialize(activity, wortiseAppId, () -> {
+                        // This listener will be invoked when the initialization finishes
+                        return Unit.INSTANCE;
+                    });
+                    AdSettings.setTestEnabled(debug);
+                    break;
+
                 case IRONSOURCE:
                 case FAN_BIDDING_IRONSOURCE:
                     String advertisingId = IronSource.getAdvertiserId(activity);
@@ -296,6 +308,14 @@ public class InitializeAd {
                     AppLovinSdkInitializationConfiguration initConfigAppLovinDiscovery = AppLovinSdkInitializationConfiguration.builder(appLovinSdkKey, activity).build();
                     AppLovinSdk.getInstance(activity).initialize(initConfigAppLovinDiscovery, sdkConfig -> {
                     });
+                    break;
+
+                case WORTISE:
+                    WortiseSdk.initialize(activity, wortiseAppId, () -> {
+                        // This listener will be invoked when the initialization finishes
+                        return Unit.INSTANCE;
+                    });
+                    AdSettings.setTestEnabled(debug);
                     break;
 
                 case IRONSOURCE:
