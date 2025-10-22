@@ -32,19 +32,14 @@ dependencies {
     implementation 'com.google.android.gms:play-services-basement:18.1.0'
 
     //Primary Ad Networks
-    implementation 'com.google.android.gms:play-services-ads:24.7.0'
-    implementation 'com.startapp:inapp-sdk:5.2.4'
-    implementation 'com.applovin:applovin-sdk:13.5.0'
-    implementation 'com.unity3d.ads:unity-ads:4.16.3'
-    implementation 'com.unity3d.ads-mediation:mediation-sdk:9.0.0'
-    implementation 'com.unity3d.ads-mediation:adquality-sdk:9.0.2'
+    implementation 'com.google.android.gms:play-services-ads:24.5.0'
+    implementation 'com.startapp:inapp-sdk:5.2.3'
+    implementation 'com.applovin:applovin-sdk:13.3.1'
+    implementation 'com.unity3d.ads:unity-ads:4.16.0'
+    implementation 'com.unity3d.ads-mediation:mediation-sdk:8.10.0'
     implementation 'com.facebook.android:audience-network-sdk:6.20.0'
-    implementation('com.wortise:android-sdk:1.7.1') {
-        exclude group: 'com.google.ads.mediation', module: 'mintegral'
-        exclude group: 'com.iab.omid.library.ironsrc'
-        exclude group: 'com.ironsource.sdk'
-    }
-    implementation 'com.vungle:vungle-ads:7.6.0'
+    implementation 'com.wortise:android-sdk:1.7.1'
+
 
     //AdMob mediation
     implementation 'com.google.ads.mediation:applovin:13.3.1.1'
@@ -58,7 +53,6 @@ dependencies {
     implementation 'com.applovin.mediation:unityads-adapter:4.16.0.0'
     implementation 'com.applovin.mediation:ironsource-adapter:8.10.0.0.0'
     implementation 'com.applovin.mediation:facebook-adapter:6.20.0.0'
-    implementation 'com.applovin.mediation:vungle-adapter:7.6.0.0'
 
     //ironSource mediation
     implementation 'com.unity3d.ads-mediation:applovin-adapter:4.3.54'
