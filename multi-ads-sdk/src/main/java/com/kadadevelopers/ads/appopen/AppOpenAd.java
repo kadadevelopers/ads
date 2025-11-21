@@ -7,9 +7,7 @@ import static com.kadadevelopers.ads.util.Constant.APPLOVIN_MAX;
 import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_ADMOB;
 import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_AD_MANAGER;
 import static com.kadadevelopers.ads.util.Constant.GOOGLE_AD_MANAGER;
-import static com.kadadevelopers.ads.util.Constant.PANGLE;
 import static com.kadadevelopers.ads.util.Constant.WORTISE;
-import static com.kadadevelopers.ads.util.Constant.YANDEX;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -205,20 +203,6 @@ public class AppOpenAd {
                             }
                         }
                         break;
-                    case PANGLE:
-                        if (!pangleAppOpenId.equals("0")) {
-                            if (!activity.getIntent().hasExtra("unique_id")) {
-                                appOpenAdPangle.showAdIfAvailable(activity, pangleAppOpenId);
-                            }
-                        }
-                        break;
-                    case YANDEX:
-                        if (!yandexAppOpenId.equals("0")) {
-                            if (!activity.getIntent().hasExtra("unique_id")) {
-                                appOpenAdYandex.showAdIfAvailable(activity, yandexAppOpenId);
-                            }
-                        }
-                        break;
                 }
             }
         }
@@ -253,20 +237,6 @@ public class AppOpenAd {
                     case WORTISE:
                         if (!wortiseAppOpenId.equals("0")) {
                             if (!appOpenAdWortise.isShowingAd) {
-                                this.activity = activity;
-                            }
-                        }
-                        break;
-                    case PANGLE:
-                        if (!pangleAppOpenId.equals("0")) {
-                            if (!appOpenAdPangle.isShowingAd) {
-                                this.activity = activity;
-                            }
-                        }
-                        break;
-                    case YANDEX:
-                        if (!yandexAppOpenId.equals("0")) {
-                            if (!appOpenAdYandex.isShowingAd) {
                                 this.activity = activity;
                             }
                         }
@@ -308,22 +278,6 @@ public class AppOpenAd {
                     case WORTISE:
                         if (!wortiseAppOpenId.equals("0")) {
                             appOpenAdWortise.showAdIfAvailable(activity, wortiseAppOpenId, onShowAdCompleteListener);
-                            AppOpenAd.isAppOpenAdLoaded = true;
-                        } else {
-                            onShowAdCompleteListener.onShowAdComplete();
-                        }
-                        break;
-                    case PANGLE:
-                        if (!pangleAppOpenId.equals("0")) {
-                            appOpenAdPangle.showAdIfAvailable(activity, pangleAppOpenId, onShowAdCompleteListener);
-                            AppOpenAd.isAppOpenAdLoaded = true;
-                        } else {
-                            onShowAdCompleteListener.onShowAdComplete();
-                        }
-                        break;
-                    case YANDEX:
-                        if (!yandexAppOpenId.equals("0")) {
-                            appOpenAdYandex.showAdIfAvailable(activity, yandexAppOpenId, onShowAdCompleteListener);
                             AppOpenAd.isAppOpenAdLoaded = true;
                         } else {
                             onShowAdCompleteListener.onShowAdComplete();
