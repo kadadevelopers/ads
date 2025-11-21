@@ -10,9 +10,7 @@ import static com.kadadevelopers.ads.util.Constant.FAN;
 import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_ADMOB;
 import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_AD_MANAGER;
 import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_APPLOVIN_MAX;
-import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_IRONSOURCE;
 import static com.kadadevelopers.ads.util.Constant.GOOGLE_AD_MANAGER;
-import static com.kadadevelopers.ads.util.Constant.IRONSOURCE;
 import static com.kadadevelopers.ads.util.Constant.NONE;
 import static com.kadadevelopers.ads.util.Constant.STARTAPP;
 import static com.kadadevelopers.ads.util.Constant.UNITY;
@@ -46,12 +44,6 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.admanager.AdManagerAdView;
-import com.ironsource.mediationsdk.ISBannerSize;
-import com.ironsource.mediationsdk.IronSource;
-import com.ironsource.mediationsdk.IronSourceBannerLayout;
-import com.ironsource.mediationsdk.adunit.adapter.utility.AdInfo;
-import com.ironsource.mediationsdk.logger.IronSourceError;
-import com.ironsource.mediationsdk.sdk.LevelPlayBannerListener;
 import com.kadadevelopers.ads.R;
 import com.kadadevelopers.ads.helper.AppLovinCustomEventBanner;
 import com.kadadevelopers.ads.util.Tools;
@@ -72,8 +64,6 @@ public class BannerAd {
     private AdManagerAdView adManagerAdView;
     private com.facebook.ads.AdView fanAdView;
     private AppLovinAdView appLovinAdView;
-    FrameLayout ironSourceBannerView;
-    private IronSourceBannerLayout ironSourceBannerLayout;
     private com.wortise.ads.banner.BannerAd wortiseBannerAd;
     FrameLayout wortiseBannerView;
 
@@ -86,12 +76,7 @@ public class BannerAd {
     private String unityBannerId = "";
     private String appLovinBannerId = "";
     private String appLovinBannerZoneId = "";
-    private String ironSourceBannerId = "";
     private String wortiseBannerId = "";
-    private String alienAdsBannerId = "";
-    private String pangleBannerId = "";
-    private String huaweiBannerId = "";
-    private String yandexBannerId = "";
     private int placementStatus = 1;
     private boolean darkTheme = false;
     private boolean legacyGDPR = false;
@@ -151,33 +136,8 @@ public class BannerAd {
         return this;
     }
 
-    public BannerAd setIronSourceBannerId(String ironSourceBannerId) {
-        this.ironSourceBannerId = ironSourceBannerId;
-        return this;
-    }
-
     public BannerAd setWortiseBannerId(String wortiseBannerId) {
         this.wortiseBannerId = wortiseBannerId;
-        return this;
-    }
-
-    public BannerAd setAlienAdsBannerId(String alienAdsBannerId) {
-        this.alienAdsBannerId = alienAdsBannerId;
-        return this;
-    }
-
-    public BannerAd setPangleBannerId(String pangleBannerId) {
-        this.pangleBannerId = pangleBannerId;
-        return this;
-    }
-
-    public BannerAd setHuaweiBannerId(String huaweiBannerId) {
-        this.huaweiBannerId = huaweiBannerId;
-        return this;
-    }
-
-    public BannerAd setYandexBannerId(String yandexBannerId) {
-        this.yandexBannerId = yandexBannerId;
         return this;
     }
 
@@ -477,53 +437,6 @@ public class BannerAd {
                         }
                     });
                     break;
-
-                case IRONSOURCE:
-                case FAN_BIDDING_IRONSOURCE:
-                    ironSourceBannerView = activity.findViewById(R.id.ironsource_banner_view_container);
-                    ISBannerSize size = ISBannerSize.BANNER;
-                    ironSourceBannerLayout = IronSource.createBanner(activity, size);
-                    FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
-                    ironSourceBannerView.addView(ironSourceBannerLayout, 0, layoutParams);
-                    if (ironSourceBannerLayout != null) {
-                        ironSourceBannerLayout.setLevelPlayBannerListener(new LevelPlayBannerListener() {
-                            @Override
-                            public void onAdLoaded(AdInfo adInfo) {
-                                Log.d(TAG, "onBannerAdLoaded");
-                                ironSourceBannerView.setVisibility(View.VISIBLE);
-                            }
-
-                            @Override
-                            public void onAdLoadFailed(IronSourceError ironSourceError) {
-                                Log.d(TAG, "onBannerAdLoadFailed" + " " + ironSourceError.getErrorMessage());
-                                loadBackupBannerAd();
-                            }
-
-                            @Override
-                            public void onAdClicked(AdInfo adInfo) {
-                                Log.d(TAG, "onBannerAdClicked");
-                            }
-
-                            @Override
-                            public void onAdLeftApplication(AdInfo adInfo) {
-                                Log.d(TAG, "onBannerAdLeftApplication");
-                            }
-
-                            @Override
-                            public void onAdScreenPresented(AdInfo adInfo) {
-                                Log.d(TAG, "onBannerAdScreenPresented");
-                            }
-
-                            @Override
-                            public void onAdScreenDismissed(AdInfo adInfo) {
-                                Log.d(TAG, "onBannerAdScreenDismissed");
-                            }
-                        });
-                        IronSource.loadBanner(ironSourceBannerLayout, ironSourceBannerId);
-                    } else {
-                        Log.d(TAG, "IronSource.createBanner returned null");
-                    }
-                    break;
             }
             Log.d(TAG, "Banner Ad is enabled");
         } else {
@@ -800,52 +713,6 @@ public class BannerAd {
                     });
                     break;
 
-                case IRONSOURCE:
-                case FAN_BIDDING_IRONSOURCE:
-                    ironSourceBannerView = activity.findViewById(R.id.ironsource_banner_view_container);
-                    ISBannerSize size = ISBannerSize.BANNER;
-                    ironSourceBannerLayout = IronSource.createBanner(activity, size);
-                    FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
-                    ironSourceBannerView.addView(ironSourceBannerLayout, 0, layoutParams);
-                    if (ironSourceBannerLayout != null) {
-                        ironSourceBannerLayout.setLevelPlayBannerListener(new LevelPlayBannerListener() {
-                            @Override
-                            public void onAdLoaded(AdInfo adInfo) {
-                                Log.d(TAG, "onBannerAdLoaded");
-                                ironSourceBannerView.setVisibility(View.VISIBLE);
-                            }
-
-                            @Override
-                            public void onAdLoadFailed(IronSourceError ironSourceError) {
-                                Log.d(TAG, "onBannerAdLoadFailed" + " " + ironSourceError.getErrorMessage());
-                            }
-
-                            @Override
-                            public void onAdClicked(AdInfo adInfo) {
-                                Log.d(TAG, "onBannerAdClicked");
-                            }
-
-                            @Override
-                            public void onAdLeftApplication(AdInfo adInfo) {
-                                Log.d(TAG, "onBannerAdLeftApplication");
-                            }
-
-                            @Override
-                            public void onAdScreenPresented(AdInfo adInfo) {
-                                Log.d(TAG, "onBannerAdScreenPresented");
-                            }
-
-                            @Override
-                            public void onAdScreenDismissed(AdInfo adInfo) {
-                                Log.d(TAG, "onBannerAdScreenDismissed");
-                            }
-                        });
-                        IronSource.loadBanner(ironSourceBannerLayout, ironSourceBannerId);
-                    } else {
-                        Log.d(TAG, "IronSource.createBanner returned null");
-                    }
-                    break;
-
                 case NONE:
                     //do nothing
                     break;
@@ -858,15 +725,6 @@ public class BannerAd {
 
     public void destroyAndDetachBanner() {
         if (adStatus.equals(AD_STATUS_ON) && placementStatus != 0) {
-            if (adNetwork.equals(IRONSOURCE) || backupAdNetwork.equals(IRONSOURCE)) {
-                if (ironSourceBannerView != null) {
-                    Log.d(TAG, "ironSource banner is not null, ready to destroy");
-                    IronSource.destroyBanner(ironSourceBannerLayout);
-                    ironSourceBannerView.removeView(ironSourceBannerLayout);
-                } else {
-                    Log.d(TAG, "ironSource banner is null");
-                }
-            }
         }
     }
 

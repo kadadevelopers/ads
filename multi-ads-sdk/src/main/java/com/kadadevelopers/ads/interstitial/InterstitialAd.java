@@ -10,9 +10,7 @@ import static com.kadadevelopers.ads.util.Constant.FAN;
 import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_ADMOB;
 import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_AD_MANAGER;
 import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_APPLOVIN_MAX;
-import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_IRONSOURCE;
 import static com.kadadevelopers.ads.util.Constant.GOOGLE_AD_MANAGER;
-import static com.kadadevelopers.ads.util.Constant.IRONSOURCE;
 import static com.kadadevelopers.ads.util.Constant.NONE;
 import static com.kadadevelopers.ads.util.Constant.STARTAPP;
 import static com.kadadevelopers.ads.util.Constant.UNITY;
@@ -44,10 +42,6 @@ import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.admanager.AdManagerInterstitialAd;
 import com.google.android.gms.ads.admanager.AdManagerInterstitialAdLoadCallback;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
-import com.ironsource.mediationsdk.IronSource;
-import com.ironsource.mediationsdk.adunit.adapter.utility.AdInfo;
-import com.ironsource.mediationsdk.logger.IronSourceError;
-import com.ironsource.mediationsdk.sdk.LevelPlayInterstitialListener;
 import com.kadadevelopers.ads.helper.AppLovinCustomEventInterstitial;
 import com.kadadevelopers.ads.listener.OnInterstitialAdDismissedListener;
 import com.kadadevelopers.ads.util.Tools;
@@ -89,10 +83,8 @@ public class InterstitialAd {
     private String unityInterstitialId = "";
     private String appLovinInterstitialId = "";
     private String appLovinInterstitialZoneId = "";
-    private String mopubInterstitialId = "";
     private String ironSourceInterstitialId = "";
     private String wortiseInterstitialId = "";
-    private String alienAdsInterstitialId = "";
     private int placementStatus = 1;
     private int interval = 3;
     private boolean legacyGDPR = false;
@@ -157,23 +149,8 @@ public class InterstitialAd {
         return this;
     }
 
-    public InterstitialAd setMopubInterstitialId(String mopubInterstitialId) {
-        this.mopubInterstitialId = mopubInterstitialId;
-        return this;
-    }
-
-    public InterstitialAd setIronSourceInterstitialId(String ironSourceInterstitialId) {
-        this.ironSourceInterstitialId = ironSourceInterstitialId;
-        return this;
-    }
-
     public InterstitialAd setWortiseInterstitialId(String wortiseInterstitialId) {
         this.wortiseInterstitialId = wortiseInterstitialId;
-        return this;
-    }
-
-    public InterstitialAd setAlienAdsInterstitialId(String alienAdsInterstitialId) {
-        this.alienAdsInterstitialId = alienAdsInterstitialId;
         return this;
     }
 
@@ -429,53 +406,6 @@ public class InterstitialAd {
                         }
                     });
                     appLovinInterstitialAdDialog = AppLovinInterstitialAd.create(AppLovinSdk.getInstance(activity), activity);
-                    break;
-
-                case IRONSOURCE:
-                case FAN_BIDDING_IRONSOURCE:
-                    IronSource.setLevelPlayInterstitialListener(new LevelPlayInterstitialListener() {
-                        @Override
-                        public void onAdReady(AdInfo adInfo) {
-                            Log.d(TAG, "onInterstitialAdReady");
-                        }
-
-                        @Override
-                        public void onAdLoadFailed(IronSourceError ironSourceError) {
-                            Log.d(TAG, "onInterstitialAdLoadFailed" + " " + ironSourceError);
-                            loadBackupInterstitialAd();
-                        }
-
-                        @Override
-                        public void onAdOpened(AdInfo adInfo) {
-                            Log.d(TAG, "onInterstitialAdOpened");
-                        }
-
-                        @Override
-                        public void onAdShowSucceeded(AdInfo adInfo) {
-                            Log.d(TAG, "onInterstitialAdShowSucceeded");
-                        }
-
-                        @Override
-                        public void onAdShowFailed(IronSourceError ironSourceError, AdInfo adInfo) {
-                            Log.d(TAG, "onInterstitialAdShowFailed" + " " + ironSourceError);
-                            loadBackupInterstitialAd();
-                        }
-
-                        @Override
-                        public void onAdClicked(AdInfo adInfo) {
-                            Log.d(TAG, "onInterstitialAdClicked");
-                        }
-
-                        @Override
-                        public void onAdClosed(AdInfo adInfo) {
-                            Log.d(TAG, "onInterstitialAdClosed");
-                            loadInterstitialAd();
-                            if (withListener) {
-                                onInterstitialAdDismissedListener.onInterstitialAdDismissed();
-                            }
-                        }
-                    });
-                    IronSource.loadInterstitial();
                     break;
 
                 case WORTISE:
@@ -762,51 +692,6 @@ public class InterstitialAd {
                     appLovinInterstitialAdDialog = AppLovinInterstitialAd.create(AppLovinSdk.getInstance(activity), activity);
                     break;
 
-                case IRONSOURCE:
-                case FAN_BIDDING_IRONSOURCE:
-                    IronSource.setLevelPlayInterstitialListener(new LevelPlayInterstitialListener() {
-                        @Override
-                        public void onAdReady(AdInfo adInfo) {
-                            Log.d(TAG, "onInterstitialAdReady");
-                        }
-
-                        @Override
-                        public void onAdLoadFailed(IronSourceError ironSourceError) {
-                            Log.d(TAG, "onInterstitialAdLoadFailed" + " " + ironSourceError);
-                        }
-
-                        @Override
-                        public void onAdOpened(AdInfo adInfo) {
-                            Log.d(TAG, "onInterstitialAdOpened");
-                        }
-
-                        @Override
-                        public void onAdShowSucceeded(AdInfo adInfo) {
-                            Log.d(TAG, "onInterstitialAdShowSucceeded");
-                        }
-
-                        @Override
-                        public void onAdShowFailed(IronSourceError ironSourceError, AdInfo adInfo) {
-                            Log.d(TAG, "onInterstitialAdShowFailed" + " " + ironSourceError);
-                        }
-
-                        @Override
-                        public void onAdClicked(AdInfo adInfo) {
-                            Log.d(TAG, "onInterstitialAdClicked");
-                        }
-
-                        @Override
-                        public void onAdClosed(AdInfo adInfo) {
-                            Log.d(TAG, "onInterstitialAdClosed");
-                            loadInterstitialAd();
-                            if (withListener) {
-                                onInterstitialAdDismissedListener.onInterstitialAdDismissed();
-                            }
-                        }
-                    });
-                    IronSource.loadInterstitial();
-                    break;
-
                 case WORTISE:
                     wortiseInterstitialAd = new com.wortise.ads.interstitial.InterstitialAd(activity, wortiseInterstitialId);
                     wortiseInterstitialAd.setListener(new com.wortise.ads.interstitial.InterstitialAd.Listener() {
@@ -982,15 +867,6 @@ public class InterstitialAd {
                         }
                         break;
 
-                    case IRONSOURCE:
-                    case FAN_BIDDING_IRONSOURCE:
-                        if (IronSource.isInterstitialReady()) {
-                            IronSource.showInterstitial(ironSourceInterstitialId);
-                        } else {
-                            showBackupInterstitialAd();
-                        }
-                        break;
-
                     case WORTISE:
                         if (wortiseInterstitialAd != null && wortiseInterstitialAd.isAvailable()) {
                             wortiseInterstitialAd.showAd();
@@ -1132,17 +1008,6 @@ public class InterstitialAd {
                     } else {
                         Log.d(TAG, "AppLovin Discovery ad not ready yet");
                         showBackupInterstitialAd();
-                    }
-                    break;
-
-                case IRONSOURCE:
-                case FAN_BIDDING_IRONSOURCE:
-                    if (IronSource.isInterstitialReady()) {
-                        IronSource.showInterstitial(ironSourceInterstitialId);
-                    } else {
-                        if (withListener) {
-                            onInterstitialAdDismissedListener.onInterstitialAdDismissed();
-                        }
                     }
                     break;
 

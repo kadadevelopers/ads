@@ -42,11 +42,6 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
-import com.ironsource.mediationsdk.IronSource;
-import com.ironsource.mediationsdk.adunit.adapter.utility.AdInfo;
-import com.ironsource.mediationsdk.logger.IronSourceError;
-import com.ironsource.mediationsdk.model.Placement;
-import com.ironsource.mediationsdk.sdk.LevelPlayRewardedVideoListener;
 import com.kadadevelopers.ads.helper.AppLovinCustomEventInterstitial;
 import com.kadadevelopers.ads.listener.OnRewardedAdCompleteListener;
 import com.kadadevelopers.ads.listener.OnRewardedAdDismissedListener;
@@ -82,12 +77,7 @@ public class RewardedAd {
     private String unityRewardedId = "";
     private String applovinMaxRewardedId = "";
     private String applovinDiscRewardedZoneId = "";
-    private String ironSourceRewardedId = "";
     private String wortiseRewardedId = "";
-    private String alienAdsRewardedId = "";
-    private String pangleRewardedId = "";
-    private String huaweiRewardedId = "";
-    private String yandexRewardedId = "";
     private int placementStatus = 1;
     private boolean legacyGDPR = false;
 
@@ -155,33 +145,8 @@ public class RewardedAd {
         return this;
     }
 
-    public RewardedAd setIronSourceRewardedId(String ironSourceRewardedId) {
-        this.ironSourceRewardedId = ironSourceRewardedId;
-        return this;
-    }
-
     public RewardedAd setWortiseRewardedId(String wortiseRewardedId) {
         this.wortiseRewardedId = wortiseRewardedId;
-        return this;
-    }
-
-    public RewardedAd setAlienAdsRewardedId(String alienAdsRewardedId) {
-        this.alienAdsRewardedId = alienAdsRewardedId;
-        return this;
-    }
-
-    public RewardedAd setPangleRewardedId(String pangleRewardedId) {
-        this.pangleRewardedId = pangleRewardedId;
-        return this;
-    }
-
-    public RewardedAd setHuaweiRewardedId(String huaweiRewardedId) {
-        this.huaweiRewardedId = huaweiRewardedId;
-        return this;
-    }
-
-    public RewardedAd setYandexRewardedId(String yandexRewardedId) {
-        this.yandexRewardedId = yandexRewardedId;
         return this;
     }
 
@@ -425,48 +390,6 @@ public class RewardedAd {
                         }
                     });
                     break;
-
-                case IRONSOURCE:
-                case FAN_BIDDING_IRONSOURCE:
-                    IronSource.setLevelPlayRewardedVideoListener(new LevelPlayRewardedVideoListener() {
-                        @Override
-                        public void onAdAvailable(AdInfo adInfo) {
-                            Log.d(TAG, "[" + mainAds + "] " + "rewarded ad is ready");
-                        }
-
-                        @Override
-                        public void onAdUnavailable() {
-
-                        }
-
-                        @Override
-                        public void onAdOpened(AdInfo adInfo) {
-
-                        }
-
-                        @Override
-                        public void onAdShowFailed(IronSourceError ironSourceError, AdInfo adInfo) {
-                            loadRewardedBackupAd(onComplete, onDismiss);
-                            Log.d(TAG, "[" + mainAds + "] " + "failed to load rewarded ad: " + ironSourceError.getErrorMessage() + ", try to load backup ad: " + backupAds);
-                        }
-
-                        @Override
-                        public void onAdClicked(Placement placement, AdInfo adInfo) {
-
-                        }
-
-                        @Override
-                        public void onAdRewarded(Placement placement, AdInfo adInfo) {
-                            onComplete.onRewardedAdComplete();
-                            Log.d(TAG, "[" + mainAds + "] " + "rewarded ad complete");
-                        }
-
-                        @Override
-                        public void onAdClosed(AdInfo adInfo) {
-                            loadRewardedAd(onComplete, onDismiss);
-                        }
-                    });
-                    break;
             }
         }
     }
@@ -692,47 +615,6 @@ public class RewardedAd {
                         }
                     });
                     break;
-
-                case IRONSOURCE:
-                case FAN_BIDDING_IRONSOURCE:
-                    IronSource.setLevelPlayRewardedVideoListener(new LevelPlayRewardedVideoListener() {
-                        @Override
-                        public void onAdAvailable(AdInfo adInfo) {
-                            Log.d(TAG, "[" + backupAds + "] [backup] " + "rewarded ad is ready");
-                        }
-
-                        @Override
-                        public void onAdUnavailable() {
-
-                        }
-
-                        @Override
-                        public void onAdOpened(AdInfo adInfo) {
-
-                        }
-
-                        @Override
-                        public void onAdShowFailed(IronSourceError ironSourceError, AdInfo adInfo) {
-                            Log.d(TAG, "[" + backupAds + "] [backup] " + "failed to load rewarded ad: " + ironSourceError.getErrorMessage() + ", try to load backup ad: " + backupAds);
-                        }
-
-                        @Override
-                        public void onAdClicked(Placement placement, AdInfo adInfo) {
-
-                        }
-
-                        @Override
-                        public void onAdRewarded(Placement placement, AdInfo adInfo) {
-                            onComplete.onRewardedAdComplete();
-                            Log.d(TAG, "[" + backupAds + "] [backup] " + "rewarded ad complete");
-                        }
-
-                        @Override
-                        public void onAdClosed(AdInfo adInfo) {
-                            loadRewardedAd(onComplete, onDismiss);
-                        }
-                    });
-                    break;
             }
         }
     }
@@ -840,15 +722,6 @@ public class RewardedAd {
                 case APPLOVIN_DISCOVERY:
                     if (appLovinInterstitialAdDialog != null) {
                         appLovinInterstitialAdDialog.showAndRender(appLovinAd);
-                    } else {
-                        showRewardedBackupAd(onComplete, onDismiss, onError);
-                    }
-                    break;
-
-                case IRONSOURCE:
-                case FAN_BIDDING_IRONSOURCE:
-                    if (IronSource.isRewardedVideoAvailable()) {
-                        IronSource.showRewardedVideo(ironSourceRewardedId);
                     } else {
                         showRewardedBackupAd(onComplete, onDismiss, onError);
                     }
@@ -965,15 +838,6 @@ public class RewardedAd {
                 case APPLOVIN_DISCOVERY:
                     if (appLovinInterstitialAdDialog != null) {
                         appLovinInterstitialAdDialog.showAndRender(appLovinAd);
-                    } else {
-                        onError.onRewardedAdError();
-                    }
-                    break;
-
-                case IRONSOURCE:
-                case FAN_BIDDING_IRONSOURCE:
-                    if (IronSource.isRewardedVideoAvailable()) {
-                        IronSource.showRewardedVideo(ironSourceRewardedId);
                     } else {
                         onError.onRewardedAdError();
                     }
@@ -1290,55 +1154,6 @@ public class RewardedAd {
                     });
                     break;
 
-                case IRONSOURCE:
-                case FAN_BIDDING_IRONSOURCE:
-                    IronSource.setLevelPlayRewardedVideoListener(new LevelPlayRewardedVideoListener() {
-                        @Override
-                        public void onAdAvailable(AdInfo adInfo) {
-                            onLoaded.onRewardedAdLoaded();
-                            if (IronSource.isRewardedVideoAvailable()) {
-                                IronSource.showRewardedVideo(ironSourceRewardedId);
-                            } else {
-                                loadAndShowRewardedBackupAd(onLoaded, onError, onDismiss, onComplete);
-                            }
-                            Log.d(TAG, "[" + mainAds + "] " + "rewarded ad is ready");
-                        }
-
-                        @Override
-                        public void onAdUnavailable() {
-                            loadAndShowRewardedBackupAd(onLoaded, onError, onDismiss, onComplete);
-                            Log.d(TAG, "[" + mainAds + "] " + "onAdUnavailable, try to load backup ad: " + backupAds);
-                        }
-
-                        @Override
-                        public void onAdOpened(AdInfo adInfo) {
-
-                        }
-
-                        @Override
-                        public void onAdShowFailed(IronSourceError ironSourceError, AdInfo adInfo) {
-                            loadAndShowRewardedBackupAd(onLoaded, onError, onDismiss, onComplete);
-                            Log.d(TAG, "[" + mainAds + "] " + "onAdShowFailed: " + ironSourceError.getErrorMessage() + ", try to load backup ad: " + backupAds);
-                        }
-
-                        @Override
-                        public void onAdClicked(Placement placement, AdInfo adInfo) {
-
-                        }
-
-                        @Override
-                        public void onAdRewarded(Placement placement, AdInfo adInfo) {
-                            onComplete.onRewardedAdComplete();
-                            Log.d(TAG, "[" + mainAds + "] " + "rewarded ad complete");
-                        }
-
-                        @Override
-                        public void onAdClosed(AdInfo adInfo) {
-                            onDismiss.onRewardedAdDismissed();
-                        }
-                    });
-                    break;
-
                 default:
                     loadAndShowRewardedBackupAd(onLoaded, onError, onDismiss, onComplete);
                     break;
@@ -1645,55 +1460,6 @@ public class RewardedAd {
                         public void adHidden(AppLovinAd appLovinAd) {
                             onDismiss.onRewardedAdDismissed();
                             Log.d(TAG, "[" + backupAds + "] [backup] " + "rewarded ad hidden");
-                        }
-                    });
-                    break;
-
-                case IRONSOURCE:
-                case FAN_BIDDING_IRONSOURCE:
-                    IronSource.setLevelPlayRewardedVideoListener(new LevelPlayRewardedVideoListener() {
-                        @Override
-                        public void onAdAvailable(AdInfo adInfo) {
-                            onLoaded.onRewardedAdLoaded();
-                            if (IronSource.isRewardedVideoAvailable()) {
-                                IronSource.showRewardedVideo(ironSourceRewardedId);
-                            } else {
-                                onError.onRewardedAdError();
-                            }
-                            Log.d(TAG, "[" + backupAds + "] [backup] " + "rewarded ad is ready");
-                        }
-
-                        @Override
-                        public void onAdUnavailable() {
-                            onError.onRewardedAdError();
-                            Log.d(TAG, "[" + backupAds + "] [backup] " + "onAdUnavailable, try to load backup ad: " + backupAds);
-                        }
-
-                        @Override
-                        public void onAdOpened(AdInfo adInfo) {
-
-                        }
-
-                        @Override
-                        public void onAdShowFailed(IronSourceError ironSourceError, AdInfo adInfo) {
-                            onError.onRewardedAdError();
-                            Log.d(TAG, "[" + backupAds + "] [backup] " + "onAdShowFailed: " + ironSourceError.getErrorMessage() + ", try to load backup ad: " + backupAds);
-                        }
-
-                        @Override
-                        public void onAdClicked(Placement placement, AdInfo adInfo) {
-
-                        }
-
-                        @Override
-                        public void onAdRewarded(Placement placement, AdInfo adInfo) {
-                            onComplete.onRewardedAdComplete();
-                            Log.d(TAG, "[" + backupAds + "] [backup] " + "rewarded ad complete");
-                        }
-
-                        @Override
-                        public void onAdClosed(AdInfo adInfo) {
-                            onDismiss.onRewardedAdDismissed();
                         }
                     });
                     break;

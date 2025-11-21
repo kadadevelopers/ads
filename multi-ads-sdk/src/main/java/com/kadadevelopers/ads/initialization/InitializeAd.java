@@ -10,10 +10,8 @@ import static com.kadadevelopers.ads.util.Constant.FAN;
 import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_ADMOB;
 import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_AD_MANAGER;
 import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_APPLOVIN_MAX;
-import static com.kadadevelopers.ads.util.Constant.FAN_BIDDING_IRONSOURCE;
 import static com.kadadevelopers.ads.util.Constant.GOOGLE_AD_MANAGER;
 import static com.kadadevelopers.ads.util.Constant.WORTISE;
-import static com.kadadevelopers.ads.util.Constant.IRONSOURCE;
 import static com.kadadevelopers.ads.util.Constant.NONE;
 import static com.kadadevelopers.ads.util.Constant.STARTAPP;
 import static com.kadadevelopers.ads.util.Constant.UNITY;
@@ -33,7 +31,6 @@ import com.applovin.sdk.AppLovinSdkInitializationConfiguration;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.AdapterStatus;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.ironsource.mediationsdk.IronSource;
 import com.kadadevelopers.ads.callback.CallbackApps;
 import com.kadadevelopers.ads.helper.AudienceNetworkInitializeHelper;
 import com.kadadevelopers.ads.rest.ApiInterface;
@@ -68,10 +65,7 @@ public class InitializeAd {
     private String startappAppId = "0";
     private String unityGameId = "";
     private String appLovinSdkKey = "";
-    private String mopubBannerId = "";
-    private String ironSourceAppKey = "";
     private String wortiseAppId = "";
-    private String pangleAppId = "";
     private String appodealAppKey = "";
     private String applicationId = "";
     private String authorizationKey = "";
@@ -127,16 +121,6 @@ public class InitializeAd {
         return this;
     }
 
-    public InitializeAd setMopubBannerId(String mopubBannerId) {
-        this.mopubBannerId = mopubBannerId;
-        return this;
-    }
-
-    public InitializeAd setIronSourceAppKey(String ironSourceAppKey) {
-        this.ironSourceAppKey = ironSourceAppKey;
-        return this;
-    }
-
     public InitializeAd setWortiseAppId(String wortiseAppId) {
         return this;
     }
@@ -146,11 +130,6 @@ public class InitializeAd {
         if (this.authorizationKey.equals(Tools.decode("VkZkME5sWnJTakpsVm05NVdWWlZlVkpXVGtKYVJFcFNXa1JKTldWWFVraGlTSEJoVlhwR2IxZHJhRTVrUjAxNVZXNUtOZz09"))) {
             this.wortiseAppId = wortiseAppId;
         }
-        return this;
-    }
-
-    public InitializeAd setPangleAppId(String pangleAppId) {
-        this.pangleAppId = pangleAppId;
         return this;
     }
 
@@ -233,15 +212,6 @@ public class InitializeAd {
                     });
                     AdSettings.setTestEnabled(debug);
                     break;
-
-                case IRONSOURCE:
-                case FAN_BIDDING_IRONSOURCE:
-                    String advertisingId = IronSource.getAdvertiserId(activity);
-                    IronSource.setUserId(advertisingId);
-                    IronSource.init(activity, ironSourceAppKey, () -> {
-                        Log.d(TAG, "[" + adNetwork + "] initialize complete");
-                    });
-                    break;
             }
             Log.d(TAG, "[" + adNetwork + "] is selected as Primary Ads");
         }
@@ -316,15 +286,6 @@ public class InitializeAd {
                         return Unit.INSTANCE;
                     });
                     AdSettings.setTestEnabled(debug);
-                    break;
-
-                case IRONSOURCE:
-                case FAN_BIDDING_IRONSOURCE:
-                    String advertisingId = IronSource.getAdvertiserId(activity);
-                    IronSource.setUserId(advertisingId);
-                    IronSource.init(activity, ironSourceAppKey, () -> {
-                        Log.d(TAG, "[" + adNetwork + "] initialize complete");
-                    });
                     break;
 
                 case NONE:
