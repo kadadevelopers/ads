@@ -1,8 +1,6 @@
 package com.kadadevelopers.ads.sdkdemo.helper;
 
 import static com.kadadevelopers.ads.util.Constant.AD_STATUS_ON;
-import static com.kadadevelopers.ads.util.Constant.APPODEAL;
-import static com.kadadevelopers.ads.util.Constant.IRONSOURCE;
 
 import android.app.Activity;
 import android.content.Context;
@@ -66,10 +64,7 @@ public class AdsManager {
                 .setAppLovinSdkKey(Constant.APPLOVIN_SDK_KEY)
                 .setStartappAppId(Constant.STARTAPP_APP_ID)
                 .setUnityGameId(Constant.UNITY_GAME_ID)
-                .setIronSourceAppKey(Constant.IRONSOURCE_APP_KEY)
                 .setWortiseAppId(Constant.WORTISE_APP_ID, "MkzVBvyZ2aU2ESAd2Qd29ydGlzZS1hZHMtc2Rrz")
-                .setPangleAppId(Constant.PANGLE_APP_ID)
-                .setAppodealAppKey(Constant.APPODEAL_APP_KEY)
                 .setApplicationId(BuildConfig.APPLICATION_ID)
                 .setDebug(BuildConfig.DEBUG)
                 .build();
@@ -111,11 +106,7 @@ public class AdsManager {
                 .setUnityBannerId(Constant.UNITY_BANNER_ID)
                 .setAppLovinBannerId(Constant.APPLOVIN_BANNER_ID)
                 .setAppLovinBannerZoneId(Constant.APPLOVIN_BANNER_ZONE_ID)
-                .setIronSourceBannerId(Constant.IRONSOURCE_BANNER_ID)
                 .setWortiseBannerId(Constant.WORTISE_BANNER_ID)
-                .setPangleBannerId(Constant.PANGLE_BANNER_ID)
-                .setHuaweiBannerId(Constant.HUAWEI_BANNER_ID)
-                .setYandexBannerId(Constant.YANDEX_BANNER_ID)
                 .setIsCollapsibleBanner(false)
                 .setDarkTheme(sharedPref.getIsDarkTheme())
                 .build();
@@ -127,11 +118,7 @@ public class AdsManager {
 
     public void resumeBannerAd() {
         if (Constant.AD_STATUS.equals(AD_STATUS_ON) && !Constant.IRONSOURCE_BANNER_ID.equals("0")) {
-            if (Constant.AD_NETWORK.equals(IRONSOURCE) || Constant.BACKUP_AD_NETWORK.equals(IRONSOURCE)) {
-                loadBannerAd();
-            } else if (Constant.AD_NETWORK.equals(APPODEAL)) {
-                loadBannerAd();
-            }
+
         }
     }
 
@@ -145,11 +132,7 @@ public class AdsManager {
                 .setUnityInterstitialId(Constant.UNITY_INTERSTITIAL_ID)
                 .setAppLovinInterstitialId(Constant.APPLOVIN_INTERSTITIAL_ID)
                 .setAppLovinInterstitialZoneId(Constant.APPLOVIN_INTERSTITIAL_ZONE_ID)
-                .setIronSourceInterstitialId(Constant.IRONSOURCE_INTERSTITIAL_ID)
                 .setWortiseInterstitialId(Constant.WORTISE_INTERSTITIAL_ID)
-                .setPangleInterstitialId(Constant.PANGLE_INTERSTITIAL_ID)
-                .setHuaweiInterstitialId(Constant.HUAWEI_INTERSTITIAL_ID)
-                .setYandexInterstitialId(Constant.YANDEX_INTERSTITIAL_ID)
                 .setInterval(Constant.INTERSTITIAL_AD_INTERVAL)
                 .build()
                 .setWithListener(true, onDismiss);
@@ -196,11 +179,7 @@ public class AdsManager {
                 .setUnityRewardedId(Constant.UNITY_REWARDED_ID)
                 .setApplovinMaxRewardedId(Constant.APPLOVIN_MAX_REWARDED_ID)
                 .setApplovinDiscRewardedZoneId(Constant.APPLOVIN_DISC_REWARDED_ZONE_ID)
-                .setIronSourceRewardedId(Constant.IRONSOURCE_REWARDED_ID)
                 .setWortiseRewardedId(Constant.WORTISE_REWARDED_ID)
-                .setPangleRewardedId(Constant.PANGLE_REWARDED_ID)
-                .setHuaweiRewardedId(Constant.HUAWEI_REWARDED_ID)
-                .setYandexRewardedId(Constant.YANDEX_REWARDED_ID)
                 .build(onLoaded, onError, onDismiss, onComplete);
     }
 
@@ -242,9 +221,6 @@ public class AdsManager {
                 .setAppLovinNativeId(Constant.APPLOVIN_NATIVE_MANUAL_ID)
                 .setAppLovinDiscoveryMrecZoneId(Constant.APPLOVIN_BANNER_MREC_ZONE_ID)
                 .setWortiseNativeId(Constant.WORTISE_NATIVE_ID)
-                .setPangleNativeId(Constant.PANGLE_NATIVE_ID)
-                .setHuaweiNativeId(Constant.HUAWEI_NATIVE_ID)
-                .setYandexNativeId(Constant.YANDEX_NATIVE_ID)
                 .setNativeAdStyle(Constant.NATIVE_STYLE)
                 .setRadius(R.dimen.corner_radius)
                 .setStrokeWidth(R.dimen.native_stroke_width)
@@ -270,9 +246,6 @@ public class AdsManager {
                 .setAppLovinNativeId(Constant.APPLOVIN_NATIVE_MANUAL_ID)
                 .setAppLovinDiscoveryMrecZoneId(Constant.APPLOVIN_BANNER_MREC_ZONE_ID)
                 .setWortiseNativeId(Constant.WORTISE_NATIVE_ID)
-                .setPangleNativeId(Constant.PANGLE_NATIVE_ID)
-                .setHuaweiNativeId(Constant.HUAWEI_NATIVE_ID)
-                .setYandexNativeId(Constant.YANDEX_NATIVE_ID)
                 .setNativeAdStyle(Constant.NATIVE_STYLE)
                 .setDarkTheme(sharedPref.getIsDarkTheme())
                 .setRadius(R.dimen.corner_radius)
@@ -294,9 +267,6 @@ public class AdsManager {
                 .setAppLovinNativeId(Constant.APPLOVIN_NATIVE_MANUAL_ID)
                 .setAppLovinDiscoveryMrecZoneId(Constant.APPLOVIN_BANNER_MREC_ZONE_ID)
                 .setWortiseNativeId(Constant.WORTISE_NATIVE_ID)
-                .setPangleNativeId(Constant.PANGLE_NATIVE_ID)
-                .setHuaweiNativeId(Constant.HUAWEI_NATIVE_ID)
-                .setYandexNativeId(Constant.YANDEX_NATIVE_ID)
                 .setNativeAdStyle(Constant.NATIVE_STYLE)
                 .setBackgroundColor(R.color.colorNativeBackgroundLight, R.color.colorNativeBackgroundDark)
                 .setRadius(context, R.dimen.corner_radius)

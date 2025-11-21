@@ -53,9 +53,7 @@ public class MyApplication extends Application {
                     .setAdMobAppOpenId(Constant.ADMOB_APP_OPEN_AD_ID)
                     .setAdManagerAppOpenId(Constant.GOOGLE_AD_MANAGER_APP_OPEN_AD_ID)
                     .setApplovinAppOpenId(Constant.APPLOVIN_APP_OPEN_AP_ID)
-                    .setWortiseAppOpenId(Constant.WORTISE_APP_OPEN_AD_ID)
-                    .setPangleAppOpenId(Constant.PANGLE_APP_OPEN_AD_ID)
-                    .setYandexAppOpenId(Constant.YANDEX_APP_OPEN_AD_ID);
+                    .setWortiseAppOpenId(Constant.WORTISE_APP_OPEN_AD_ID);
         }
     }
 

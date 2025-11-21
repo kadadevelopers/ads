@@ -90,6 +90,6 @@ public class Constant {
 
     public static final int INTERSTITIAL_AD_INTERVAL = 1;
     public static final int NATIVE_AD_INDEX = 2;
-    public static final int NATIVE_AD_INTERVAL = 8;
+    public static final int NATIVE_AD_INTERVAL = 5;
 
 }

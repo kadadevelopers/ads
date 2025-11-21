@@ -4,15 +4,11 @@ import static com.kadadevelopers.ads.util.Constant.ADMOB;
 import static com.kadadevelopers.ads.util.Constant.APPLOVIN;
 import static com.kadadevelopers.ads.util.Constant.APPLOVIN_DISCOVERY;
 import static com.kadadevelopers.ads.util.Constant.APPLOVIN_MAX;
-import static com.kadadevelopers.ads.util.Constant.APPODEAL;
 import static com.kadadevelopers.ads.util.Constant.FACEBOOK;
 import static com.kadadevelopers.ads.util.Constant.FAN;
 import static com.kadadevelopers.ads.util.Constant.GOOGLE_AD_MANAGER;
-import static com.kadadevelopers.ads.util.Constant.HUAWEI;
-import static com.kadadevelopers.ads.util.Constant.PANGLE;
 import static com.kadadevelopers.ads.util.Constant.STARTAPP;
 import static com.kadadevelopers.ads.util.Constant.WORTISE;
-import static com.kadadevelopers.ads.util.Constant.YANDEX;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -150,10 +146,6 @@ public class AdapterPost extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case APPLOVIN_DISCOVERY:
             case STARTAPP:
             case WORTISE:
-            case PANGLE:
-            case HUAWEI:
-            case YANDEX:
-            case APPODEAL:
                 int maxNumberNativeAd;
                 if (totalPosts >= Constant.NATIVE_AD_INTERVAL) {
                     maxNumberNativeAd = (totalPosts / Constant.NATIVE_AD_INTERVAL);
